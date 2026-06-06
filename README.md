@@ -75,6 +75,12 @@ go run main.go
 
 ---
 
-## Licença 
+## Autor
+
+Desenvolvido por [Emanuel Rodrigues](https://github.com/emanuelrodrigues2005).
+
+---
+
+## Licença
 
 Este projeto está licenciado sob a licença [MIT](LICENSE) - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
