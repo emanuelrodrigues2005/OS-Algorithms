@@ -76,4 +76,5 @@ go run main.go
 ---
 
 ## Licença 
-Repositório puramente educacional acadêmico. Código aberto aos interessados que desejarem clonar, reproduzir, estudar ou apontar melhorias e bugs.
+
+Este projeto está licenciado sob a licença [MIT](LICENSE) - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
