@@ -145,13 +145,7 @@ def rm(name, parent_name=None):
     entries.remove(entry)
     print(f"Arquivo '{name}' excluido.")
     
-def mkfile_raid0(parent_name, name, size_str):
-    """
-    Cria arquivo usando RAID 0 (striping).
-    parent_name: nome do diretório pai
-    name: nome do arquivo
-    size_str: tamanho em KB (string)
-    """
+def mkfile_raid0(parent_name, name, size_str, password=None):
     parent = find_entry(parent_name, "root")
     if not parent:
         print("Erro: Diretorio pai não encontrado.")
@@ -168,7 +162,6 @@ def mkfile_raid0(parent_name, name, size_str):
     allocated = []
 
     for _ in range(blocks_needed):
-        # encontra próximo bloco livre no disco atual
         start_block = 0
         found = False
         while start_block < TOTAL_BLOCKS:
@@ -183,7 +176,13 @@ def mkfile_raid0(parent_name, name, size_str):
             return
         disk_index = (disk_index + 1) % NUM_DISKS_RAID0
 
-    entries.append(Entry(name, False, size, allocated[0][1], blocks_needed, parent_name))
+    entry = Entry(name, False, size, allocated[0][1], blocks_needed, parent_name)
+    
+    if password:
+        entry.hashed_password = Security.hash_password_sha256(password)
+    
+    entries.append(entry)
+    
     print(f"Arquivo '{name}' alocado em RAID 0:")
     for d, b in allocated:
         print(f"  Disco {d}: bloco {b}")
